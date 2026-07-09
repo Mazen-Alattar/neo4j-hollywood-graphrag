@@ -4,11 +4,18 @@
 # into Neo4j. Safe to run multiple times — all writes use MERGE (upsert).
 # ─────────────────────────────────────────────────────────────────────────────
 
-from db import Neo4jConnection
-from data.hollywood_data import (
-    PEOPLE, PRODUCTION_HOUSES, MOVIES, AWARDS,
-    ACTED_IN, DIRECTED, COMPOSED_MUSIC_FOR, PRODUCED_BY, WON_AWARDS,
-)
+try:
+    from db import Neo4jConnection
+    from data.hollywood_data import (
+        PEOPLE, PRODUCTION_HOUSES, MOVIES, AWARDS,
+        ACTED_IN, DIRECTED, COMPOSED_MUSIC_FOR, PRODUCED_BY, WON_AWARDS,
+    )
+except ModuleNotFoundError:
+    from src.db import Neo4jConnection
+    from src.data.hollywood_data import (
+        PEOPLE, PRODUCTION_HOUSES, MOVIES, AWARDS,
+        ACTED_IN, DIRECTED, COMPOSED_MUSIC_FOR, PRODUCED_BY, WON_AWARDS,
+    )
 
 
 # ─────────────────────────────────────────────────────────────────────────────

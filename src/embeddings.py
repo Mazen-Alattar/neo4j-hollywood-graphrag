@@ -12,7 +12,10 @@ import time
 import numpy as np
 from google import genai
 from dotenv import load_dotenv
-from db import Neo4jConnection
+try:
+    from db import Neo4jConnection
+except ModuleNotFoundError:
+    from src.db import Neo4jConnection
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))

@@ -11,8 +11,12 @@
 
 import os
 from dotenv import load_dotenv
-from db import Neo4jConnection
-from embeddings import find_top_nodes
+try:
+    from db import Neo4jConnection
+    from embeddings import find_top_nodes
+except ModuleNotFoundError:
+    from src.db import Neo4jConnection
+    from src.embeddings import find_top_nodes
 from groq import Groq
 
 load_dotenv()

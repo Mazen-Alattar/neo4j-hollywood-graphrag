@@ -18,9 +18,16 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from dotenv import load_dotenv
 
-from db import Neo4jConnection
-from graphrag import graphrag_answer, retrieve_subgraph, subgraph_to_context
-from embeddings import find_top_nodes
+try:
+    # Running locally as: uvicorn api:app (cwd = src/)
+    from db import Neo4jConnection
+    from graphrag import graphrag_answer, retrieve_subgraph, subgraph_to_context
+    from embeddings import find_top_nodes
+except ModuleNotFoundError:
+    # Running on Render as: uvicorn src.api:app (cwd = project root)
+    from src.db import Neo4jConnection
+    from src.graphrag import graphrag_answer, retrieve_subgraph, subgraph_to_context
+    from src.embeddings import find_top_nodes
 
 load_dotenv()
 
