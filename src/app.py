@@ -16,7 +16,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_URL = os.getenv("API_URL", "http://localhost:8000")
+# if you run locally use this url -> http://localhost:8000
+API_URL = os.getenv("API_URL", "https://neo4j-hollywood-graphrag.onrender.com")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
