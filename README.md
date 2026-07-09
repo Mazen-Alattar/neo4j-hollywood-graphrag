@@ -3,9 +3,6 @@
 A complete GraphRAG (Graph Retrieval-Augmented Generation) system built on a **Hollywood knowledge graph**. Ask questions about English cinema in plain English — the system finds the answer by traversing a Neo4j graph of movies, actors, directors, composers, and awards, then generating a natural language response via Groq (Llama 3.3).
 
 ---
-Built as part of **Codeverra** to help you learn coding, DSA, data science, and AI the right way. Learn more: https://codeverra.com
-
----
 
 ## What This Project Demonstrates
 
@@ -264,6 +261,3 @@ MATCH (ph:ProductionHouse {name: 'Universal Pictures'})-[:PRODUCED]->(m:Movie)
 RETURN m.title, m.year, m.box_office_million ORDER BY m.box_office_million DESC
 ```
 
----
-
-*Built as part of the GraphRAG Masterclass at [codeverra](https://www.codeverra.com)*
