@@ -4,6 +4,64 @@ A complete GraphRAG (Graph Retrieval-Augmented Generation) system built on a **H
 
 ---
 
+# 🎬 Hollywood GraphRAG
+
+A complete GraphRAG (Graph Retrieval-Augmented Generation) system built on a **Hollywood knowledge graph**. Ask questions about English cinema in plain English — the system finds the answer by traversing a Neo4j graph of movies, actors, directors, composers, and awards, then generating a natural language response via Groq (Llama 3.3).
+
+---
+
+# 🚀 Live Demo
+
+### Streamlit Frontend
+
+https://hollywood-neo4j-graphrag.streamlit.app/
+
+### FastAPI Backend
+
+https://neo4j-hollywood-graphrag.onrender.com
+
+### API Documentation (Swagger UI)
+
+https://neo4j-hollywood-graphrag.onrender.com/docs
+
+---
+
+## Deployment Architecture
+
+```
+                    User
+                      │
+                      ▼
+      Streamlit Community Cloud
+https://hollywood-neo4j-graphrag.streamlit.app
+                      │
+               HTTP Requests
+                      │
+                      ▼
+           FastAPI Backend (Render)
+https://neo4j-hollywood-graphrag.onrender.com
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+    Neo4j Aura      Groq LLM   Google Gemini
+     Graph DB       (Llama 3.3)  Embeddings
+```
+
+---
+
+## Try It Online
+
+Open the Streamlit application and ask questions such as:
+
+- Which films did Leonardo DiCaprio and Hans Zimmer work on together?
+- Which directors have won an Academy Award for Best Director?
+- What are all the films produced by Marvel Studios starring Robert Downey Jr.?
+- Which actors have worked under both Christopher Nolan and Martin Scorsese?
+
+No local installation is required.
+
+---
+
 ## What This Project Demonstrates
 
 | Concept | How it appears in this project |
@@ -112,28 +170,31 @@ This calls the Google Gemini embeddings API for each node and stores the vectors
 python src/embeddings.py
 ```
 
-### 5. Start the FastAPI backend
+### Running Locally (Optional)
 
-The Streamlit app communicates with FastAPI over HTTP — FastAPI must be running first.
+The project is already deployed online.
+
+If you want to run it locally:
+
+#### 5. Start the FastAPI backend
 
 ```bash
-# Start FastAPI server on port 8000
 python src/api.py
 ```
 
-Leave this terminal running. Open http://localhost:8000/docs to confirm the interactive OpenAPI documentation is live.
+Open:
 
-### 6. Run the Streamlit app
+http://localhost:8000/docs
 
-Open a **new terminal**, activate the venv, then:
+#### 6. Start Streamlit
 
 ```bash
 streamlit run src/app.py
 ```
 
-Open http://localhost:8501 in your browser.
+Open:
 
----
+http://localhost:8501
 
 ## Usage
 
