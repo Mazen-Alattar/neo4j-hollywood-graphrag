@@ -4,12 +4,6 @@ A complete GraphRAG (Graph Retrieval-Augmented Generation) system built on a **H
 
 ---
 
-# 🎬 Hollywood GraphRAG
-
-A complete GraphRAG (Graph Retrieval-Augmented Generation) system built on a **Hollywood knowledge graph**. Ask questions about English cinema in plain English — the system finds the answer by traversing a Neo4j graph of movies, actors, directors, composers, and awards, then generating a natural language response via Groq (Llama 3.3).
-
----
-
 # 🚀 Live Demo
 
 ### Streamlit Frontend
