@@ -24,6 +24,9 @@ https://neo4j-hollywood-graphrag.onrender.com
 
 https://neo4j-hollywood-graphrag.onrender.com/docs
 
+> [!IMPORTANT]
+> **Deployment Notice:** This project uses free hosting services (Render + Streamlit Community Cloud). The backend may take **1–2 minutes** to start after being idle. Please be patient during the first request.
+
 ---
 
 ## Deployment Architecture
@@ -64,15 +67,15 @@ No local installation is required.
 
 ## What This Project Demonstrates
 
-| Concept | How it appears in this project |
-|---|---|
-| Graph database fundamentals | Neo4j with a Hollywood ontology |
-| Cypher query language | Loader, traversal, and stat queries |
-| Vector embeddings on graph nodes | Each node carries a Google Gemini (`gemini-embedding-001`) embedding |
-| GraphRAG pipeline | Vector search (Python cosine similarity) → graph traversal → Groq LLM answer |
-| FastAPI backend | REST endpoints for all pipeline operations |
-| Streamlit frontend | 4-page chat + explorer interface |
-| Docker Compose | Multi-container setup for services |
+| Concept                          | How it appears in this project                                               |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| Graph database fundamentals      | Neo4j with a Hollywood ontology                                              |
+| Cypher query language            | Loader, traversal, and stat queries                                          |
+| Vector embeddings on graph nodes | Each node carries a Google Gemini (`gemini-embedding-001`) embedding         |
+| GraphRAG pipeline                | Vector search (Python cosine similarity) → graph traversal → Groq LLM answer |
+| FastAPI backend                  | REST endpoints for all pipeline operations                                   |
+| Streamlit frontend               | 4-page chat + explorer interface                                             |
+| Docker Compose                   | Multi-container setup for services                                           |
 
 ---
 
@@ -102,12 +105,12 @@ RELATIONSHIPS
 
 ### Prerequisites
 
-| Tool | Version | Notes |
-|---|---|---|
-| Neo4j | 5.x+ / Aura Cloud | Running instance (local or remote) |
-| Python | 3.10+ | For running scripts and servers |
-| Gemini API key | — | Required for `gemini-embedding-001` embeddings |
-| Groq API key | — | Required for `llama-3.3-70b-versatile` reasoning |
+| Tool           | Version           | Notes                                            |
+| -------------- | ----------------- | ------------------------------------------------ |
+| Neo4j          | 5.x+ / Aura Cloud | Running instance (local or remote)               |
+| Python         | 3.10+             | For running scripts and servers                  |
+| Gemini API key | —                 | Required for `gemini-embedding-001` embeddings   |
+| Groq API key   | —                 | Required for `llama-3.3-70b-versatile` reasoning |
 
 ### 1. Clone and configure
 
@@ -119,6 +122,7 @@ cd hollywood-graphrag
 ```
 
 Your `.env` file:
+
 ```env
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USERNAME=neo4j
@@ -149,6 +153,7 @@ python src/loader.py
 ```
 
 Expected output:
+
 ```
 [1/2] Loading nodes...
   Setting up ontology constraints...
@@ -202,10 +207,10 @@ http://localhost:8501
 
 The **💬 Chat** page lets you ask natural language questions. Try:
 
-- *"Which films did Leonardo DiCaprio and Hans Zimmer work on together?"*
-- *"Which directors have won an Academy Award for Best Director?"*
-- *"What are all the films produced by Marvel Studios starring Robert Downey Jr.?"*
-- *"Which actors have worked under both Christopher Nolan and Martin Scorsese?"*
+- _"Which films did Leonardo DiCaprio and Hans Zimmer work on together?"_
+- _"Which directors have won an Academy Award for Best Director?"_
+- _"What are all the films produced by Marvel Studios starring Robert Downey Jr.?"_
+- _"Which actors have worked under both Christopher Nolan and Martin Scorsese?"_
 
 The **🔍 Explore** page lets you look up any entity by name and see its full graph neighbourhood.
 
@@ -282,14 +287,17 @@ User question (text)
 ## Extending the Project
 
 ### Adding more movies
+
 Add entries to `MOVIES`, `ACTED_IN`, `DIRECTED` etc. in `src/data/hollywood_data.py`, then re-run `loader.py` and `embeddings.py`.
 
 ### Adding a new relationship type
+
 1. Add rows to the relevant list in `hollywood_data.py`
 2. Add a loading function in `loader.py`
 3. Call it from `load_all()`
 
 ### Switching to a different LLM
+
 Replace the `groq` or `google-genai` calls in `graphrag.py` and `embeddings.py` with another API SDK.
 
 ---
@@ -321,4 +329,3 @@ RETURN [n IN nodes(path) | coalesce(n.name, n.title)] AS path, length(path) AS h
 MATCH (ph:ProductionHouse {name: 'Universal Pictures'})-[:PRODUCED]->(m:Movie)
 RETURN m.title, m.year, m.box_office_million ORDER BY m.box_office_million DESC
 ```
-
